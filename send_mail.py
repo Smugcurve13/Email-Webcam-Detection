@@ -8,6 +8,7 @@ RECEIVER = ''
 
 
 def send_email(img_path):
+    print('send email function started')
     email_msg = EmailMessage
     email_msg['Subject'] = "New Object Detected"
     email_msg.set_content('New Object detected in webcame frame')
@@ -22,6 +23,7 @@ def send_email(img_path):
     gmail.login(SENDER,PASSWORD)
     gmail.sendmail(SENDER, RECEIVER, email_msg.as_string())
     gmail.quit()
+    print('send email function stopped')
 
 if __name__ == '__main__':
     send_email(img_path='images/test.png')
