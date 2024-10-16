@@ -1,6 +1,7 @@
 import cv2 as cv
 import time
 import glob
+import os
 from send_mail import send_email
 
 video = cv.VideoCapture(0)
@@ -9,6 +10,12 @@ time.sleep(1)
 first_frame = None
 status_list = []
 count =1
+
+def clean_folder():
+    images = glob.glob('images/*png')
+    for image in images:
+        os.remove(image)
+
 while True:
     status = 0
     check , frame = video.read()
@@ -44,6 +51,7 @@ while True:
 
     if status_list[0]==1 and status_list[1]==0:
         send_email(image_with_object)
+        clean_folder()
 
     print(status_list)
 
